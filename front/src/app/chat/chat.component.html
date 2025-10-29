@@ -1,19 +1,14 @@
-<div class="chat-container">
-  <h2>POC Chat</h2>
-
-  <div class="messages">
-    <div *ngFor="let msg of messages" class="message">
-      <b>{{ msg.expediteurType }}:</b> {{ msg.contenu }}
-    </div>
-  </div>
-
-  <div class="input-container">
-    <input
-      type="text"
-      [(ngModel)]="newMessage"
-      placeholder="Écrire un message"
-      (keyup.enter)="sendMessage()"
-    />
-    <button (click)="sendMessage()">Envoyer</button>
-  </div>
+<div>
+  <label>Expéditeur :</label>
+  <select [(ngModel)]="expediteurType">
+    <option value="UTILISATEUR">Utilisateur</option>
+    <option value="SERVICE_CLIENT">Service Client</option>
+  </select>
 </div>
+
+<div *ngFor="let msg of messages">
+  <b>{{msg.expediteurType}}:</b> {{msg.contenu}}
+</div>
+
+<input type="text" [(ngModel)]="newMessage" placeholder="Écrire un message" />
+<button (click)="sendMessage()">Envoyer</button>

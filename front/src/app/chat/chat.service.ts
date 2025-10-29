@@ -12,28 +12,49 @@ export class ChatService {
   public messages$ = this.messageSubject.asObservable();
 
   connect() {
+    console.log('🔌 Tentative de connexion WebSocket...');
     const socket = new SockJS('http://localhost:8080/ws');
+
     this.stompClient = new Client({
       webSocketFactory: () => socket,
-      reconnectDelay: 5000,
-      debug: (str) => console.log(str)
+      reconnectDelay: 5000, // essaie de se reconnecter après 5s
+      debug: (str) => console.log('[STOMP DEBUG]', str)
     });
 
     this.stompClient.onConnect = (frame) => {
+      console.log('✅ Connecté au WebSocket !', frame);
+
       this.stompClient?.subscribe('/topic/messages', (msg: Message) => {
+        console.log('📩 Message reçu du serveur :', msg.body);
         this.messageSubject.next(JSON.parse(msg.body));
       });
+    };
+
+    this.stompClient.onStompError = (frame) => {
+      console.error('❌ Erreur STOMP :', frame.headers['message']);
+      console.error('Détails :', frame.body);
+    };
+
+    this.stompClient.onWebSocketError = (event) => {
+      console.error('🚨 Erreur WebSocket :', event);
+    };
+
+    this.stompClient.onDisconnect = () => {
+      console.warn('⚠️ Déconnecté du WebSocket.');
     };
 
     this.stompClient.activate();
   }
 
-  sendMessage(message: any) {
-    if (this.stompClient && this.stompClient.connected) {
-      this.stompClient.publish({
-        destination: '/app/chat',
-        body: JSON.stringify(message)
-      });
-    }
+sendMessage(message: any) {
+  if (this.stompClient && this.stompClient.connected) {
+    console.log('🚀 Envoi du message au serveur :', message);
+    this.stompClient.publish({
+      destination: '/app/chat', // correspond au @MessageMapping côté backend
+      body: JSON.stringify(message)
+    });
+  } else {
+    console.warn('⚠️ WebSocket non connecté, impossible d’envoyer le message.');
   }
+}
 }
