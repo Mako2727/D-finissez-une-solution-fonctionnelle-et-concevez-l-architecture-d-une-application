@@ -80,3 +80,8 @@ POST	/api/conversations	Crée une nouvelle conversation
 GET	/api/messages/conversation/{id}	Récupère les messages d’une conversation  
 POST	/api/messages	Ajoute un message à une conversation  
 
+🧪un script de création des table se trouve dans 
+\back\src\main\resources\sql\dump.sql
+
+il vous faudra ensuite créer un utilisateur dans la table service_client et un autre dans la table utilisateur
+
