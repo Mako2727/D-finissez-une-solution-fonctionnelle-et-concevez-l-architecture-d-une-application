@@ -16,21 +16,31 @@ public class Message {
 
     private String expediteurType; // "UTILISATEUR" ou "SERVICE_CLIENT"
 
+    private String expediteurNom; // Nom lisible de l'expéditeur
+
     @CreationTimestamp
     private LocalDateTime dateEnvoi;
 
     @ManyToOne
+    @JoinColumn(name = "conversation_id")
     private Conversation conversation;
 
     // Getters / Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public String getContenu() { return contenu; }
     public void setContenu(String contenu) { this.contenu = contenu; }
+
     public String getExpediteurType() { return expediteurType; }
     public void setExpediteurType(String expediteurType) { this.expediteurType = expediteurType; }
+
+    public String getExpediteurNom() { return expediteurNom; }
+    public void setExpediteurNom(String expediteurNom) { this.expediteurNom = expediteurNom; }
+
     public LocalDateTime getDateEnvoi() { return dateEnvoi; }
     public void setDateEnvoi(LocalDateTime dateEnvoi) { this.dateEnvoi = dateEnvoi; }
+
     public Conversation getConversation() { return conversation; }
     public void setConversation(Conversation conversation) { this.conversation = conversation; }
 }

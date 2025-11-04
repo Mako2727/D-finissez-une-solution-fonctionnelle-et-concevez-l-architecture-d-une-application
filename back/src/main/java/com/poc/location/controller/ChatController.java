@@ -22,19 +22,16 @@ public class ChatController {
         this.conversationService = conversationService;
     }
 
-    @MessageMapping("/chat")
-    @SendTo("/topic/messages")
-    public Message handleMessage(@Payload Message message) {
-        // Récupère la conversation existante
-        Conversation conv = conversationService.findById(message.getConversation().getId());
-        if(conv == null) {
-            throw new RuntimeException("Conversation introuvable avec id: " + message.getConversation().getId());
-        }
-        message.setConversation(conv);
+@MessageMapping("/chat")
+@SendTo("/topic/messages")
+public Message handleMessage(@Payload Message message) {
+    System.out.println("📩 handleMessage appelé !");
+    System.out.println("Contenu: " + message.getContenu());
+    System.out.println("Expéditeur: " + message.getExpediteurNom() + " (" + message.getExpediteurType() + ")");
+    
+    Conversation conv = conversationService.findById(message.getConversation().getId());
+    message.setConversation(conv);
 
-        // Sauvegarde en BDD
-        Message saved = messageService.save(message);
-        System.out.println("Message reçu et sauvegardé : " + saved.getContenu());
-        return saved;
-    }
+    return messageService.save(message);
+}
 }
