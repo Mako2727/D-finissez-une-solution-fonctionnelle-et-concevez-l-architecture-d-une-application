@@ -34,7 +34,7 @@ public class ChatController {
 
         // Sauvegarde en BDD
         Message saved = messageService.save(message);
-        System.out.println("📩 Message reçu et sauvegardé : " + saved.getContenu());
+        System.out.println("Message reçu et sauvegardé : " + saved.getContenu());
         return saved;
     }
 }
