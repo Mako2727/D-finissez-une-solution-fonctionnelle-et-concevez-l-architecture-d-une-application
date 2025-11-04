@@ -1,13 +1,14 @@
 <div>
   <label>Expéditeur :</label>
-  <select [(ngModel)]="expediteurType">
-    <option value="UTILISATEUR">Utilisateur</option>
-    <option value="SERVICE_CLIENT">Service Client</option>
+  <select [(ngModel)]="selectedExpediteurId" (change)="updateType()">
+    <option *ngFor="let e of expediteurs" [value]="e.id">
+      {{ e.nom }} ({{ e.type }})
+    </option>
   </select>
 </div>
 
 <div *ngFor="let msg of messages">
-  <b>{{msg.expediteurType}}:</b> {{msg.contenu}}
+  <b>{{ msg.expediteurType }}:</b> {{ msg.contenu }}
 </div>
 
 <input type="text" [(ngModel)]="newMessage" placeholder="Écrire un message" />
