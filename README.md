@@ -7,13 +7,13 @@ Il repose sur une architecture moderne :
 🔄 Communication temps réel via WebSocket (STOMP + SockJS)  
 
 ⚙️ Backend — Spring Boot  
-🧱 Technologies  
-☕ Java 17  
-🌱 Spring Boot 3.x  
-💾 Hibernate / JPA  
-🧩 WebSocket (STOMP + SockJS)  
-🐬 MySQL  
-📦 Installation des dépendances  
+ Technologies  
+ Java 17  
+ Spring Boot 3.x  
+ Hibernate / JPA  
+ WebSocket (STOMP + SockJS)  
+ MySQL  
+ Installation des dépendances  
 mvn clean install  
 
 🚀 Lancer le backend  
@@ -24,13 +24,12 @@ http://localhost:8080
 
 
 💻 Frontend — Angular  
-🧱 Technologies  
-🔺 Angular 18  
-🧠 TypeScript  
-⚡ RxJS  
-🎨 Bootstrap / Tailwind (selon setup)  
-🔄 SockJS + STOMP.js pour les WebSockets  
-📦 Installation des dépendances  
+ Technologies  
+ Angular 18  
+ TypeScript  
+ RxJS   
+ SockJS + STOMP.js pour les WebSockets  
+ Installation des dépendances  
 npm install  
 
 🚀 Lancer le frontend  
@@ -80,7 +79,7 @@ POST	/api/conversations	Crée une nouvelle conversation
 GET	/api/messages/conversation/{id}	Récupère les messages d’une conversation  
 POST	/api/messages	Ajoute un message à une conversation  
 
-🧪un script de création des table se trouve dans 
+🧪un script de création des tables se trouve dans 
 \back\src\main\resources\sql\dump.sql
 
 il vous faudra ensuite créer un utilisateur dans la table service_client et un autre dans la table utilisateur

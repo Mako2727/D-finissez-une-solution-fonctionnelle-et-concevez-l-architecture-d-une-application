@@ -17,7 +17,7 @@ export class ChatService {
 
     this.stompClient = new Client({
       webSocketFactory: () => socket,
-      reconnectDelay: 5000, // essaie de se reconnecter après 5s
+      reconnectDelay: 5000, 
       debug: (str) => console.log('[STOMP DEBUG]', str)
     });
 
@@ -50,7 +50,7 @@ sendMessage(message: any) {
   if (this.stompClient && this.stompClient.connected) {
     console.log('Envoi du message au serveur :', message);
     this.stompClient.publish({
-      destination: '/app/chat', // correspond au @MessageMapping côté backend
+      destination: '/app/chat',
       body: JSON.stringify(message)
     });
   } else {

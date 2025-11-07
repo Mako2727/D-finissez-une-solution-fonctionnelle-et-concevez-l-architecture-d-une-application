@@ -13,7 +13,7 @@ public class Conversation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String statut; // ex: "OUVERTE", "FERMEE"
+    private String statut; 
 
     @CreationTimestamp
     private LocalDateTime dateCreation;
@@ -27,7 +27,7 @@ public class Conversation {
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
     private List<Message> messages;
 
-    // Getters / Setters
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getStatut() { return statut; }

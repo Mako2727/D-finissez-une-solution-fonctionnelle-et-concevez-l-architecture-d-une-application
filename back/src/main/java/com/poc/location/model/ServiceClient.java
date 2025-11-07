@@ -15,7 +15,7 @@ public class ServiceClient {
     @OneToMany(mappedBy = "serviceClient", cascade = CascadeType.ALL)
     private List<Conversation> conversations;
 
-    // Getters / Setters
+   
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNom() { return nom; }

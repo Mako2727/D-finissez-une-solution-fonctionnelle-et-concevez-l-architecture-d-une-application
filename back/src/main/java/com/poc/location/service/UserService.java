@@ -1,7 +1,7 @@
 package com.poc.location.service;
 
 import org.springframework.stereotype.Service;
-import com.poc.location.model.Utilisateur; // ton entity
+import com.poc.location.model.Utilisateur; 
 import com.poc.location.repository.UtilisateurRepository;
 import java.util.List;
 

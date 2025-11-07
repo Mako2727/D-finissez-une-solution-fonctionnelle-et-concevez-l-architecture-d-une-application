@@ -18,11 +18,11 @@ export class ChatComponent implements OnInit {
   newMessage: string = '';
   conversationId: number = 1;
 
-  // Variables pour gérer l'expéditeur
+ 
   expediteurs: Expediteur[] = [];
-  selectedExpediteurId!: number;       // id sélectionné dans le select
-  selectedExpediteurNom: string = '';  // nom lisible
-  selectedExpediteurType: string = ''; // "UTILISATEUR" ou "SERVICE_CLIENT"
+  selectedExpediteurId!: number;      
+  selectedExpediteurNom: string = ''; 
+  selectedExpediteurType: string = '';
 
   constructor(
     private chatService: ChatService,
@@ -30,17 +30,17 @@ export class ChatComponent implements OnInit {
   ) {}
 
   selectedExpediteur!: { nom: string; type: string };
-  
+
   ngOnInit() {
-    // Connexion au WebSocket
+   
     this.chatService.connect();
     this.chatService.messages$.subscribe(msg => this.messages.push(msg));
 
-    // Récupération des expéditeurs depuis le backend
+   
     this.expediteurService.getExpediteurs().subscribe(data => {
       this.expediteurs = data;
 
-      // Initialiser le select avec le premier expéditeur disponible
+     
       if (this.expediteurs.length > 0) {
         this.selectedExpediteurId = this.expediteurs[0].id;
         this.updateExpediteur();
@@ -54,18 +54,15 @@ updateExpediteur() {
   this.selectedExpediteurNom = this.selectedExpediteur.nom;
   this.selectedExpediteurType = this.selectedExpediteur.type;
 
-  console.log(`✅ Expéditeur sélectionné : ${this.selectedExpediteurNom} (${this.selectedExpediteurType})`);
+ 
 }
 
-  // Envoi d'un message
+
   sendMessage() {
     if (this.newMessage.trim() === '') return;
 
     try {
-      console.log(`📤 Envoi du message : "${this.newMessage}"`);
-      console.log(`   Expéditeur : ${this.selectedExpediteurNom}`);
-      console.log(`   Type       : ${this.selectedExpediteurType}`);
-      console.log(`   Conversation ID : ${this.conversationId}`);
+    
 
       const msg = {
         contenu: this.newMessage,
@@ -77,7 +74,7 @@ updateExpediteur() {
       this.chatService.sendMessage(msg);
       this.newMessage = '';
     } catch (error) {
-      console.error('⚠️ Une erreur est survenue lors de l’envoi du message :', error);
+      
     }
   }
 }

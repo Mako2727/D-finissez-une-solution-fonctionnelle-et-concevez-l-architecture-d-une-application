@@ -25,9 +25,7 @@ public class ChatController {
 @MessageMapping("/chat")
 @SendTo("/topic/messages")
 public Message handleMessage(@Payload Message message) {
-    System.out.println("📩 handleMessage appelé !");
-    System.out.println("Contenu: " + message.getContenu());
-    System.out.println("Expéditeur: " + message.getExpediteurNom() + " (" + message.getExpediteurType() + ")");
+
     
     Conversation conv = conversationService.findById(message.getConversation().getId());
     message.setConversation(conv);

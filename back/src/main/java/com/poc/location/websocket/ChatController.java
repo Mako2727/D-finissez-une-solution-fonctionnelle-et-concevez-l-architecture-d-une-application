@@ -15,8 +15,8 @@ public class ChatController {
         this.messageService = messageService;
     }
 
-    @MessageMapping("/chat") // endpoint pour envoyer les messages
-    @SendTo("/topic/messages") // destination pour tous les abonnés
+    @MessageMapping("/chat") 
+    @SendTo("/topic/messages") 
     public Message send(Message message) {
         return messageService.save(message);
     }
