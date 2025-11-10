@@ -49,10 +49,11 @@ CREATE TABLE `message` (
   `date_envoi` datetime(6) DEFAULT NULL,
   `expediteur_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `conversation_id` bigint DEFAULT NULL,
+  `expediteur_nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK6yskk3hxw5sklwgi25y6d5u1l` (`conversation_id`),
   CONSTRAINT `FK6yskk3hxw5sklwgi25y6d5u1l` FOREIGN KEY (`conversation_id`) REFERENCES `conversation` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,8 +66,9 @@ DROP TABLE IF EXISTS `service_client`;
 CREATE TABLE `service_client` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mot_de_passe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -79,8 +81,9 @@ DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE `utilisateur` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mot_de_passe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -92,4 +95,4 @@ CREATE TABLE `utilisateur` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-31 22:40:16
+-- Dump completed on 2025-11-10 15:52:43
