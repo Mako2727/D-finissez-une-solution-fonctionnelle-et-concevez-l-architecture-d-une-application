@@ -83,4 +83,11 @@ POST	/api/messages	Ajoute un message à une conversation
 \back\src\main\resources\sql\dump.sql
 
 il vous faudra ensuite créer un utilisateur dans la table service_client et un autre dans la table utilisateur
+-- Insertion dans la table utilisateur
+INSERT INTO `utilisateur` (`nom`, `mot_de_passe`) VALUES
+('marius', '$12$e42nmiITvUisipjMSVvygOtt5llyE2svTFRUU8lZ/9Nz/0h0OEDa6');
+
+-- Insertion dans la table service_client
+INSERT INTO `service_client` (`nom`, `mot_de_passe`) VALUES
+('sClient', '$12$e42nmiITvUisipjMSVvygOtt5llyE2svTFRUU8lZ/9Nz/0h0OEDa6');
 
