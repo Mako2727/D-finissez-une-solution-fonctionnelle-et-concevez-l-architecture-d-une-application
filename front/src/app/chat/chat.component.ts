@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ChatService } from './chat.service';
-import { ExpediteurService, Expediteur } from './expediteur.service';
+import { ChatService } from './service/chat.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat',
@@ -12,69 +13,55 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   messages: any[] = [];
   newMessage: string = '';
   conversationId: number = 1;
 
- 
-  expediteurs: Expediteur[] = [];
-  selectedExpediteurId!: number;      
-  selectedExpediteurNom: string = ''; 
+  selectedExpediteurNom: string = '';
   selectedExpediteurType: string = '';
 
-  constructor(
-    private chatService: ChatService,
-    private expediteurService: ExpediteurService
-  ) {}
+  private sub!: Subscription;
 
-  selectedExpediteur!: { nom: string; type: string };
+  constructor(private chatService: ChatService, private router: Router) {}
 
-  ngOnInit() {
-   
-    this.chatService.connect();
-    this.chatService.messages$.subscribe(msg => this.messages.push(msg));
+private subscription: any;
 
-   
-    this.expediteurService.getExpediteurs().subscribe(data => {
-      this.expediteurs = data;
+ngOnInit() {
+  this.selectedExpediteurNom = localStorage.getItem('nom') || '';
+  this.selectedExpediteurType = localStorage.getItem('role') || '';
 
-     
-      if (this.expediteurs.length > 0) {
-        this.selectedExpediteurId = this.expediteurs[0].id;
-        this.updateExpediteur();
-      }
-    });
+  this.chatService.connect();
+
+  if (!this.subscription) {
+    this.subscription = this.chatService.messages$.subscribe(msg => this.messages.push(msg));
   }
-
-updateExpediteur() {
-  if (!this.selectedExpediteur) return;
-
-  this.selectedExpediteurNom = this.selectedExpediteur.nom;
-  this.selectedExpediteurType = this.selectedExpediteur.type;
-
- 
 }
 
+ngOnDestroy() {
+  if (this.subscription) {
+    this.subscription.unsubscribe();
+  }
+}
 
   sendMessage() {
     if (this.newMessage.trim() === '') return;
 
-    try {
-    
+    const msg = {
+      contenu: this.newMessage,
+      expediteurNom: this.selectedExpediteurNom,
+      expediteurType: this.selectedExpediteurType,
+      conversation: { id: this.conversationId }
+    };
 
-      const msg = {
-        contenu: this.newMessage,
-        expediteurType: this.selectedExpediteurType,
-        expediteurNom: this.selectedExpediteurNom,
-        conversation: { id: this.conversationId }
-      };
+    this.chatService.sendMessage(msg);
+    this.newMessage = '';
+  }
 
-      this.chatService.sendMessage(msg);
-      this.newMessage = '';
-    } catch (error) {
-      
-    }
+  logout() {
+    localStorage.removeItem('nom');
+    localStorage.removeItem('role');
+    this.router.navigate(['/login']);
   }
 }

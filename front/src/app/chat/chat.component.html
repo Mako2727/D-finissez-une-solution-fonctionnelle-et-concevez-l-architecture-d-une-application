@@ -1,10 +1,6 @@
 <div>
-  <label>Expéditeur :</label>
-<select [(ngModel)]="selectedExpediteur" (change)="updateExpediteur()">
-  <option *ngFor="let e of expediteurs" [ngValue]="{ nom: e.nom, type: e.type }">
-    {{ e.nom }} ({{ e.type }})
-  </option>
-</select>
+  <b>Connecté en tant que :</b> {{ selectedExpediteurNom }} ({{ selectedExpediteurType }})
+  <button (click)="logout()">Déconnexion</button>
 </div>
 
 <div *ngFor="let msg of messages">

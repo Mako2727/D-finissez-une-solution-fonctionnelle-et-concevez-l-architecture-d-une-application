@@ -1,0 +1,24 @@
+<!-- login.component.html -->
+<div class="login-page">
+  <div class="login-container">
+    <h2>Connexion</h2>
+
+    <form (ngSubmit)="login()">
+      <div>
+        <label for="nom">Identifiant</label>
+        <input id="nom" type="text" [(ngModel)]="nom" name="nom" required>
+      </div>
+
+      <div>
+        <label for="motDePasse">Mot de passe</label>
+        <input id="motDePasse" type="password" [(ngModel)]="motDePasse" name="motDePasse" required>
+      </div>
+
+      <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit">Se connecter</button>
+    </form>
+  </div>
+</div>

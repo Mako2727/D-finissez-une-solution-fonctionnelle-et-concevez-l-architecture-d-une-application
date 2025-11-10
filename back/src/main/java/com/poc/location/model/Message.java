@@ -14,9 +14,9 @@ public class Message {
 
     private String contenu;
 
-    private String expediteurType; // "UTILISATEUR" ou "SERVICE_CLIENT"
+    private String expediteurType; 
 
-    private String expediteurNom; // Nom lisible de l'expéditeur
+    private String expediteurNom; 
 
     @CreationTimestamp
     private LocalDateTime dateEnvoi;
@@ -25,7 +25,7 @@ public class Message {
     @JoinColumn(name = "conversation_id")
     private Conversation conversation;
 
-    // Getters / Setters
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

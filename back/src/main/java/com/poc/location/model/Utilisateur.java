@@ -12,14 +12,21 @@ public class Utilisateur {
 
     private String nom;
 
+    private String motDePasse; // 👈 Nouveau champ pour l’authentification
+
     @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
     private List<Conversation> conversations;
 
-  
+    // --- Getters & Setters ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
+
+    public String getMotDePasse() { return motDePasse; }
+    public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
+
     public List<Conversation> getConversations() { return conversations; }
     public void setConversations(List<Conversation> conversations) { this.conversations = conversations; }
 }
