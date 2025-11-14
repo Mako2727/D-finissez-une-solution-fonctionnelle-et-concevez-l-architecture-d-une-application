@@ -4,16 +4,16 @@ public class LoginRequest {
     private String nom;
     private String motDePasse;
 
-    // Constructeur vide (obligatoire pour Jackson)
+    
     public LoginRequest() {}
 
-    // Constructeur complet (optionnel)
+    
     public LoginRequest(String nom, String motDePasse) {
         this.nom = nom;
         this.motDePasse = motDePasse;
     }
 
-    // Getters et Setters
+    
     public String getNom() {
         return nom;
     }

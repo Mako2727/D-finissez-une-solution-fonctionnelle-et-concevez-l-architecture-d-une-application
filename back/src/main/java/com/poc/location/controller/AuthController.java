@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*") // pour Angular
+@CrossOrigin(origins = "*") 
 public class AuthController {
 
     @Autowired
     private AuthService authService;
 
-    // --- Enregistrement ---
+   
     @PostMapping("/register/utilisateur")
     public Utilisateur registerUtilisateur(@RequestParam String nom, @RequestParam String motDePasse) {
         return authService.registerUtilisateur(nom, motDePasse);

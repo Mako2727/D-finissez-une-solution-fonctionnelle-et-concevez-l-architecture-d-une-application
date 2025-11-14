@@ -19,7 +19,7 @@ public class AuthService {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // ✅ Enregistrement d’un utilisateur
+    
     public Utilisateur registerUtilisateur(String nom, String motDePasse) {
         Utilisateur u = new Utilisateur();
         u.setNom(nom);
@@ -27,7 +27,7 @@ public class AuthService {
         return utilisateurRepository.save(u);
     }
 
-    // ✅ Enregistrement d’un agent service client
+    
     public ServiceClient registerServiceClient(String nom, String motDePasse) {
         ServiceClient s = new ServiceClient();
         s.setNom(nom);
@@ -35,7 +35,7 @@ public class AuthService {
         return serviceClientRepository.save(s);
     }
 
-    // ✅ Connexion (retourne true si ok)
+   
     public boolean loginUtilisateur(String nom, String motDePasse) {
         Utilisateur u = utilisateurRepository.findByNom(nom);
         return u != null && passwordEncoder.matches(motDePasse, u.getMotDePasse());
