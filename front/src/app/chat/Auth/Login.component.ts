@@ -26,11 +26,11 @@ export class LoginComponent {
 
     this.authService.login(this.nom, this.motDePasse).subscribe({
       next: res => {
-        // Stocke le rôle et le nom
+       
         localStorage.setItem('role', res.role);
         localStorage.setItem('nom', this.nom);
 
-        // Redirection vers la page de chat
+       
         this.router.navigate(['/chat']);
       },
       error: err => {

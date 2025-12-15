@@ -1,4 +1,4 @@
-// auth.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/auth'; // adapte selon ton backend
+  private apiUrl = 'http://localhost:8080/auth'; 
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -16,7 +16,7 @@ export class AuthService {
     return this.http.post<{role: string}>(`${this.apiUrl}/login`, { nom, motDePasse })
       .pipe(
         tap(res => {
-          localStorage.setItem('role', res.role); // on stocke le rôle
+          localStorage.setItem('role', res.role); 
         })
       );
   }

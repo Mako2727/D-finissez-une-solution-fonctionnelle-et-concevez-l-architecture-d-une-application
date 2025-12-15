@@ -19,6 +19,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     ...(appConfig.providers || []),
     importProvidersFrom(HttpClientModule),
-    provideRouter(routes) // <-- routing ajouté ici
+    provideRouter(routes) 
   ]
 }).catch((err) => console.error(err));
