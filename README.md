@@ -11,8 +11,9 @@ Il repose sur une architecture moderne :
  Java 17  
  Spring Boot 3.x  
  Hibernate / JPA  
- WebSocket (STOMP + SockJS)  
+ WebSocket   
  MySQL  
+ 
  Installation des dépendances  
 mvn clean install  
 
@@ -29,6 +30,7 @@ http://localhost:8080
  TypeScript  
  RxJS   
  SockJS + STOMP.js pour les WebSockets  
+ 
  Installation des dépendances  
 npm install  
 
@@ -42,18 +44,13 @@ http://localhost:4200
 Architecture générale  
 ┌────────────────────────────────────────────┐  
 │                    Frontend (Angular)      │  
-│  - chat.component.ts                       │  
-│  - chat.service.ts                         │  
-│  - websocket.service.ts                    │  
+│                                            │  
 └────────────────────────────────────────────┘  
                 │ REST / WebSocket  
                 ▼  
 ┌────────────────────────────────────────────┐  
 │                 Backend (Spring Boot)      │  
-│  - MessageController                       │  
-│  - ConversationController                  │  
-│  - Services (MessageService, Conversation) │  
-│  - WebSocketConfig                         │  
+│                                            │  
 └────────────────────────────────────────────┘  
                 │ JDBC  
                 ▼  
@@ -66,18 +63,14 @@ Architecture générale
   
 
 🧪 Exemple d’utilisation  
-Démarrer une nouvelle conversation (POST /api/conversations)  
+Démarrer une nouvelle conversation  
+->Se connecter en tant qu'utilisateur
 Envoyer un message depuis Angular en tant qu’utilisateur 👤  
+
+->Se connecter en tant que Service client
 Ouvrir une seconde fenêtre Angular et répondre en tant que service client 🧑‍💼  
 Les deux interfaces échangent les messages en temps réel 🎯  
   
-  
-🔌 Endpoints REST  
-Méthode	Endpoint	Description
-GET	/api/conversations	Liste des conversations  
-POST	/api/conversations	Crée une nouvelle conversation  
-GET	/api/messages/conversation/{id}	Récupère les messages d’une conversation  
-POST	/api/messages	Ajoute un message à une conversation  
 
 🧪un script de création des tables se trouve dans 
 \back\src\main\resources\sql\dump.sql
@@ -87,7 +80,16 @@ il vous faudra ensuite créer un utilisateur dans la table service_client et un 
 INSERT INTO `utilisateur` (`nom`, `mot_de_passe`) VALUES
 ('marius', '$12$e42nmiITvUisipjMSVvygOtt5llyE2svTFRUU8lZ/9Nz/0h0OEDa6');
 
+
 -- Insertion dans la table service_client
 INSERT INTO `service_client` (`nom`, `mot_de_passe`) VALUES
 ('sClient', '$12$e42nmiITvUisipjMSVvygOtt5llyE2svTFRUU8lZ/9Nz/0h0OEDa6');
+
+
+--Création de la conversation
+INSERT INTO conversation (  date_creation,  statut,  service_client_id,  utilisateur_id) 
+VALUES (  NOW(),  'OUVERT',  1,  1);
+
+
+->ci-dessus (pour le test) le mot de passe en clair est "marius"
 
